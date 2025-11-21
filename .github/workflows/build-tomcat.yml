@@ -1,0 +1,43 @@
+name: Build Tomcat
+on: [workflow_dispatch]
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code tomcat-users.xml
+        uses: actions/checkout@v4
+
+      - name: List project files and java version
+        run: |
+          ls -ltr
+          java -version
+
+      - name: Checkout the Tomcat repo
+        uses: actions/checkout@v4.2.2
+        with:
+          repository: apache/tomcat
+          ref: main
+          path: ./tomcat
+
+      - name: setup java
+        uses: actions/setup-java@v4.7.1
+        with:
+          distribution: oracle
+          java-version: 21
+          java-package: jdk
+          architecture: x64
+
+      - name: List project files and java version
+        run: |
+          ls -ltr
+          java -version
+
+      - name: copy tomcat-users.xml into tomcat configuration directory
+        run: | 
+          ls -lrt
+          java -version
+      - name: Compile Tomcat
+        run: |
+          cd ./tomcat
+          ant
+
