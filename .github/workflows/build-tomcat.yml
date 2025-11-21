@@ -10,6 +10,7 @@ jobs:
       - name: List project files and java version
         run: |
           ls -ltr
+          tree
           java -version
 
       - name: Checkout the Tomcat repo
@@ -30,6 +31,7 @@ jobs:
       - name: List project files and java version
         run: |
           ls -ltr
+          tree
           java -version
 
       - name: copy tomcat-users.xml into tomcat configuration directory
